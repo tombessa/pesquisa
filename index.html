@@ -3,7 +3,7 @@
 <head>
     <base target="_top">
     <title>Um Estudo com Motoristas e Usuários</title>
-    <meta charset="UTF-8">    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
@@ -360,7 +360,7 @@
             }
         }
     </style>
-     <link rel="shortcut icon" type="image/x-icon" href="favicon-uerj.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon-uerj.ico">
 </head>
 <body>
 <div class="consent-container">
@@ -376,34 +376,6 @@
         </div>
     </div>
 
-    
-    <!-- SEÇÃO DE GEOLOCALIZAÇÃO -->
-    <div class="location-section">
-        <input class="ip-display" id="ipDisplay" name="ipDisplay" value="${sLocalizacao}" type="hidden">
-        <h3>📍 Geolocalização Detectada</h3>
-        <div class="location-display" id="locationDisplay">
-            <div>Detectando sua localização...</div>
-            <div class="location-details" id="locationDetails" style="display: none;">
-                <div class="location-item">
-                    <strong>Cidade:</strong>
-                    <span id="cidade">-</span>
-                </div>
-                <div class="location-item">
-                    <strong>Estado:</strong>
-                    <span id="estado">-</span>
-                </div>
-                <div class="location-item">
-                    <strong>País:</strong>
-                    <span id="pais">-</span><label>(</label><span id="siglaEstado">-</span><label>)</label>
-                </div>
-                <div class="location-item">
-                    <strong>Latitude, Longitude:</strong>
-                    <label>(</label><span id="lat">-</span><label> , </label>
-                    <span id="lon">-</span><label>)</label>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- SEÇÃO DE CONSENTIMENTO -->
     <div class="consent-section">
@@ -441,7 +413,7 @@
     <!-- FOOTER -->
     <div class="footer">
         <p>Esta pesquisa segue os princípios éticos da Resolução CNS 510/2016.</p>
-        <div id="content-core"><p><a href="https://www.gov.br/conselho-nacional-de-saude/pt-br/atos-normativos/resolucoes/2016/resolucao-no-510.pdf/@@download/file"><img border="0" src="pdf.png" alt="application/pdf">Resolução nº 510.pdf</a><span class="discreet">— 308 KB</span></p></div>
+        <div id="content-core"><p><a href="https://www.gov.br/conselho-nacional-de-saude/pt-br/atos-normativos/resolucoes/2016/resolucao-no-510.pdf/@@download/file">Resolução nº 510.pdf</a><span class="discreet"> — 308 KB</span></p></div>
         <div class="university-badge">
             <span>Faculdade de Direito - Universidade do Estado do Rio de Janeiro</span>
         </div>
@@ -454,7 +426,8 @@
     // VARIÁVEIS
     let isRedirecting = false;
     let prefilledURL = null;
-    captureGeolocation();
+    habilitarFormulario();
+    //captureGeolocation();
 
     // ELEMENTOS DOM
     const consentCheckbox = document.getElementById('consentCheckbox');
@@ -535,8 +508,6 @@
             setTimeout(() => {
                 window.location.href = prefilledURL;
             }, 500);
-        }else{
-            proceedBtn.querySelector('.btn-text').textContent = 'Sem a localização não é possível responder a pesquisa...';
         }
 
     }
@@ -560,7 +531,7 @@
     // MODAL DE POLÍTICA DE PRIVACIDADE
     function showPrivacyModal() {
         const modalHTML = "" +
-            "<div style=\"\n              position: fixed;\n              top: 0;\n              left: 0;\n              width: 100%;\n              height: 100%;\n              background: rgba(0,0,0,0.7);\n              display: flex;\n              justify-content: center;\n              align-items: center;\n              z-index: 1000;\n              padding: 20px;\n            \">\n              <div style=\"\n                background: white;\n                padding: 30px;\n                border-radius: 15px;\n                max-width: 700px;\n                max-height: 80vh;\n                overflow-y: auto;\n                box-shadow: 0 10px 40px rgba(0,0,0,0.2);\n              \">\n                <h2 style=\"color: #1e3c72; margin-bottom: 20px; border-bottom: 2px solid #1e3c72; padding-bottom: 10px;\">\n                  Política de Privacidade da Pesquisa\n                </h2>\n                <div style=\"color: #4a5568; line-height: 1.6; font-size: 14px;\">\n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">1. Finalidade da Coleta</h3>\n                  <p>Os dados coletados nesta pesquisa têm finalidade exclusivamente acadêmica e científica, visando a produção de conhecimento sobre trabalho mediado por plataformas digitais.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">2. Dados Coletados</h3>\n                  <p>Coletamos apenas: respostas ao questionário, localização geográfica aproximada (para análise regional) e dados técnicos anonimizados. Não coletamos dados pessoais identificáveis.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">3. Anonimização</h3>\n                  <p>Todas as respostas são anonimizadas durante o processamento. A localização é agregada em nível regional para análise estatística.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">4. Armazenamento</h3>\n                  <p>Os dados são armazenados em servidores seguros por 5 anos, conforme exigido pelas normas de pesquisa científica, e depois excluídos permanentemente.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">5. Compartilhamento</h3>\n                  <p>Os dados podem ser compartilhados apenas em formato agregado e anonimizado para fins de publicação científica, sempre mantendo o anonimato dos participantes.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">6. Seus Direitos</h3>\n                  <p>Você tem direito a: acessar seus dados, solicitar correções ou exclusão, e retirar seu consentimento a qualquer momento através do email: bessa.antonyonne@graduacao.uerj.br, informando o e-mail de cadastro do formulário.</p>\n                </div>\n                <button onclick=\"this.parentElement.parentElement.remove()\" \n                        style=\"\n                          margin-top: 25px;\n                          padding: 12px 24px;\n                          background: #1e3c72;\n                          color: white;\n                          border: none;\n                          border-radius: 8px;\n                          cursor: pointer;\n                          font-weight: 600;\n                          width: 100%;\n                        \">\n                  Fechar\n                </button>\n              </div>\n            </div>";
+            "<div style=\"\n              position: fixed;\n              top: 0;\n              left: 0;\n              width: 100%;\n              height: 100%;\n              background: rgba(0,0,0,0.7);\n              display: flex;\n              justify-content: center;\n              align-items: center;\n              z-index: 1000;\n              padding: 20px;\n            \">\n              <div style=\"\n                background: white;\n                padding: 30px;\n                border-radius: 15px;\n                max-width: 700px;\n                max-height: 80vh;\n                overflow-y: auto;\n                box-shadow: 0 10px 40px rgba(0,0,0,0.2);\n              \">\n                <h2 style=\"color: #1e3c72; margin-bottom: 20px; border-bottom: 2px solid #1e3c72; padding-bottom: 10px;\">\n                  Política de Privacidade da Pesquisa\n                </h2>\n                <div style=\"color: #4a5568; line-height: 1.6; font-size: 14px;\">\n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">1. Finalidade da Coleta</h3>\n                  <p>Os dados coletados nesta pesquisa têm finalidade exclusivamente acadêmica e científica, visando a produção de conhecimento sobre trabalho mediado por plataformas digitais.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">2. Dados Coletados</h3>\n                  <p>Coletamos apenas: respostas ao questionário, dados técnicos anonimizados e e-mail se o usuário quiser informar. Não coletamos dados pessoais identificáveis.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">3. Anonimização</h3>\n                  <p>Todas as respostas são anonimizadas durante o processamento. </p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">4. Armazenamento</h3>\n                  <p>Os dados são armazenados em servidores seguros por 5 anos, conforme exigido pelas normas de pesquisa científica, e depois excluídos permanentemente.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">5. Compartilhamento</h3>\n                  <p>Os dados podem ser compartilhados apenas em formato agregado e anonimizado para fins de publicação científica, sempre mantendo o anonimato dos participantes.</p>\n                  \n                  <h3 style=\"color: #1e3c72; margin: 20px 0 10px 0;\">6. Seus Direitos</h3>\n                  <p>Você tem direito a: acessar seus dados, solicitar correções ou exclusão, e retirar seu consentimento a qualquer momento através do email: bessa.antonyonne@graduacao.uerj.br, informando o e-mail de cadastro do formulário.</p>\n                </div>\n                <button onclick=\"this.parentElement.parentElement.remove()\" \n                        style=\"\n                          margin-top: 25px;\n                          padding: 12px 24px;\n                          background: #1e3c72;\n                          color: white;\n                          border: none;\n                          border-radius: 8px;\n                          cursor: pointer;\n                          font-weight: 600;\n                          width: 100%;\n                        \">\n                  Fechar\n                </button>\n              </div>\n            </div>";
 
         const modal = document.createElement('div');
         modal.innerHTML = modalHTML;
@@ -700,7 +671,8 @@
 
     function habilitarFormulario(){
         const formURL = 'https://docs.google.com/forms/d/e/1FAIpQLScCJ4Tn3yCIk3kkNU563JsowJp_kgTB4O-9KPWD8L3JMzlkbQ/viewform';
-        const ipFieldId = 'entry.1013674840';
+        /*
+		const ipFieldId = 'entry.1013674840';
         const geoLocalization = {
             cidade: document.getElementById('cidade').textContent,
             estado: document.getElementById('estado').textContent,
@@ -716,7 +688,9 @@
 
         const ipDisplay = document.getElementById('ipDisplay');
         ipDisplay.value =sLocalizacao;
-        prefilledURL = `${formURL}?${ipFieldId}=${encodeURIComponent(sLocalizacao)}`;
+		prefilledURL = `${formURL}?${ipFieldId}=${encodeURIComponent(sLocalizacao)}`;
+		*/
+        prefilledURL = `${formURL}`;
     }
 </script>
 </body>
